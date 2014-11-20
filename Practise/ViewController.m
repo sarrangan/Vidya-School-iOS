@@ -25,8 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     songList = @{@"Suktams" : @[@"Purusha Suktam", @"Sri Suktam", @"Neela Suktam", @"Narayana Suktam", @"Durga Suktam", @"Medha Suktam"],
-                 @"LSN" : @[@"Sri Lalitha Sahasranaama Stotram"],
-                 @"Rudram" : @[@"Rudram Namakam"]};
+                 @"LSN" : @[@"Sri Lalitha Sahasranaama Stotram"]};
     tableSections = [songList allKeys];
     _tableView.dataSource = self;
     _tableView.delegate = self;
