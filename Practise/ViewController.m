@@ -39,7 +39,7 @@
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSString *sectionTitle = [tableSections objectAtIndex:section];
     NSArray *sectionContent = [songList objectForKey:sectionTitle];
-    return sectionContent.count;
+    return [sectionContent count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -122,18 +122,29 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return tableSections.count;
+    return [tableSections count];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    return [tableSections objectAtIndex:section];
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    static NSString *simpleTableIdentifier = @"TableOneHeader";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+        cell.contentView.backgroundColor = [UIColor blackColor];
+    }
+
+    cell.textLabel.textColor = [UIColor whiteColor];
+    
+    NSString *songName = [tableSections objectAtIndex:section];
+    cell.textLabel.text = songName;
+    return cell;
+
 }
 
-- (void) tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-    header.contentView.backgroundColor = [UIColor blackColor];
-    header.textLabel.textColor = [UIColor whiteColor];
+ return 44;
 }
 @end
